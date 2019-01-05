@@ -22,8 +22,12 @@ def criar_memoria():
 def interpretar(codigo):
     memoria = criar_memoria()
     ponteiro = 0
-    for caractere in codigo:
+    indice_caractere = 0
+    stack_controle = []
+    while indice_caractere < len(codigo):
+        caractere = codigo[indice_caractere]
         if verificar_caractere_invalido(caractere):
+            indice_caractere = indice_caractere + 1
             continue
         if caractere == '>':
             ponteiro = (ponteiro + 1) % len(memoria)
@@ -34,7 +38,8 @@ def interpretar(codigo):
         if caractere == '-':
             memoria[ponteiro] = (memoria[ponteiro] - 1) % 256
         if caractere == '.':
-            sys.stdout.write(chr(memoria[ponteiro]))    
+            sys.stdout.write(chr(memoria[ponteiro]))
+        indice_caractere = indice_caractere + 1
     print()
 
 if __name__ == '__main__':
