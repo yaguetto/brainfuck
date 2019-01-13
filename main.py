@@ -61,7 +61,10 @@ def interpretar(codigo):
             indice_caractere = x
         if caractere == ',':
             proxima_tecla = sys.stdin.read(1)
-            memoria[ponteiro] = ord(proxima_tecla)
+            if len(proxima_tecla) == 0:
+                memoria[ponteiro] = 0
+            else:
+                memoria[ponteiro] = ord(proxima_tecla)
         if caractere != ']':
             indice_caractere = indice_caractere + 1
     print()
