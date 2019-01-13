@@ -67,7 +67,7 @@ def interpretar(codigo):
                 memoria[ponteiro] = ord(proxima_tecla)
         if caractere != ']':
             indice_caractere = indice_caractere + 1
-    print()
+    #print()
 
 if __name__ == '__main__':
     main()
