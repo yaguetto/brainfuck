@@ -36,9 +36,9 @@ def interpretar(codigo):
     while indice_caractere < len(codigo):
         caractere = codigo[indice_caractere]
         if caractere == '>':
-            ponteiro = (ponteiro + 1) % len(memoria)
+            ponteiro = (ponteiro + 1) % 30000
         elif caractere == '<':
-            ponteiro = (ponteiro - 1) % len(memoria)
+            ponteiro = (ponteiro - 1) % 30000
         elif caractere == '+':
             memoria[ponteiro] = (memoria[ponteiro] + 1) % 256
         elif caractere == '-':
