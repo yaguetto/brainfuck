@@ -37,34 +37,34 @@ def interpretar(codigo):
         caractere = codigo[indice_caractere]
         if caractere == '>':
             ponteiro = (ponteiro + 1) % len(memoria)
-        if caractere == '<':
+        elif caractere == '<':
             ponteiro = (ponteiro - 1) % len(memoria)
-        if caractere == '+':
+        elif caractere == '+':
             memoria[ponteiro] = (memoria[ponteiro] + 1) % 256
-        if caractere == '-':
+        elif caractere == '-':
             memoria[ponteiro] = (memoria[ponteiro] - 1) % 256
-        if caractere == '.':
+        elif caractere == '.':
             sys.stdout.write(chr(memoria[ponteiro]))
             sys.stdout.flush()
-        if caractere == ';':
+        elif caractere == ';':
             print(memoria[ponteiro])
-        if caractere == '[':
+        elif caractere == '[':
             if memoria[ponteiro] != 0:
                 controle_loop.append(indice_caractere)
-            if memoria[ponteiro] == 0:
+            elif memoria[ponteiro] == 0:
                 contador_loop = 1
                 while contador_loop != 0:
                     indice_caractere += 1
                     if codigo[indice_caractere] == '[':
                         contador_loop += 1
-                    if codigo[indice_caractere] == ']':
+                    elif codigo[indice_caractere] == ']':
                         contador_loop -= 1
                 #print(indice_caractere, ']')
                 #indice_caractere += 1
-        if caractere == ']':
+        elif caractere == ']':
             x = controle_loop.pop()
             indice_caractere = x
-        if caractere == ',':
+        elif caractere == ',':
             proxima_tecla = sys.stdin.read(1)
             if len(proxima_tecla) == 0:
                 memoria[ponteiro] = 0
