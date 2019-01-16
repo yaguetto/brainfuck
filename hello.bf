@@ -14,7 +14,7 @@
 > - .                 Imprime 'O'
 > -- .                Imprime 'l'
 > --- .               Imprime 'a'
-> ++ .                Imprime ' '
+> ++ .                Imprime '  '
 > --- .               Imprime 'M'
 > --- .               Imprime 'u'
 > .                   Imprime 'n'
