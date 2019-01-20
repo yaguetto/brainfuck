@@ -73,11 +73,11 @@ def interpretar(codigo, buffer):
                 memoria[ponteiro] = ord(proxima_tecla)
         if caractere != ']':
             indice_caractere = indice_caractere + 1
-    print()
 
 def server(codigo, buffer):
     codigo_otimizado = otimizar_codigo(codigo)
     interpretar(codigo_otimizado, buffer)
+    return
 
 class ConsoleBuffer:
     # escreve no buffer do terminal

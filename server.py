@@ -66,12 +66,14 @@ def processa_brainfuck():
     '''
     buffer = HTTPBuffer()
     interpretador.server(codigo, buffer)
-    return ''
+    return buffer.buffer
 
 class HTTPBuffer:
+    def __init__(self):
+        self.buffer = ''
     # escreve no buffer do terminal
     def write(self, text):
-        print(text)
+        self.buffer =  self.buffer + text
     # renderiza o que esta escrito no buffer e esvazia
     def flush(self):
         pass
