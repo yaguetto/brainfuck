@@ -4,7 +4,7 @@
 python main.py hello.bf
 ```
 
-# Dependêcias
+# Dependências
 
 ```
 pip install -r requirements.txt
