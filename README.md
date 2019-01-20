@@ -11,7 +11,7 @@ python interpretador.py hello.bf
 FLASK_APP=server.py flask run
 ```
 
-### Hospendando para outras pessoas acessarem
+### Flask para outras pessoas acessarem
 
 ```
 FLASK_APP=server.py flask run --host=0.0.0.0
