@@ -3,7 +3,7 @@ import sys
 def main():
     codigo = ler_arquivo(sys.argv[1])
     codigo = otimizar_codigo(codigo)
-    buffer = Buffer()
+    buffer = ConsoleBuffer()
     interpretar(codigo, buffer)
 
 def ler_arquivo(arquivo):
@@ -75,7 +75,11 @@ def interpretar(codigo, buffer):
             indice_caractere = indice_caractere + 1
     print()
 
-class Buffer:
+def server(codigo, buffer):
+    codigo_otimizado = otimizar_codigo(codigo)
+    interpretar(codigo_otimizado, buffer)
+
+class ConsoleBuffer:
     # escreve no buffer do terminal
     def write(self, text):
         sys.stdout.write(text)
