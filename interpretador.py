@@ -3,7 +3,8 @@ import sys
 def main():
     codigo = ler_arquivo(sys.argv[1])
     codigo = otimizar_codigo(codigo)
-    interpretar(codigo)
+    buffer = Buffer()
+    interpretar(codigo, buffer)
 
 def ler_arquivo(arquivo):
     arquivo_lido = open(arquivo, 'r')
@@ -28,7 +29,7 @@ def criar_memoria():
         memoria.append(0)
     return memoria
 
-def interpretar(codigo):
+def interpretar(codigo, buffer):
     memoria = criar_memoria()
     ponteiro = 0
     controle_loop = []
@@ -44,8 +45,8 @@ def interpretar(codigo):
         elif caractere == '-':
             memoria[ponteiro] = (memoria[ponteiro] - 1) % 256
         elif caractere == '.':
-            sys.stdout.write(chr(memoria[ponteiro]))
-            sys.stdout.flush()
+            buffer.write(chr(memoria[ponteiro]))
+            buffer.flush()
         elif caractere == ';':
             print(memoria[ponteiro])
         elif caractere == '[':
@@ -65,7 +66,7 @@ def interpretar(codigo):
             x = controle_loop.pop()
             indice_caractere = x
         elif caractere == ',':
-            proxima_tecla = sys.stdin.read(1)
+            proxima_tecla = buffer.read(1)
             if len(proxima_tecla) == 0:
                 memoria[ponteiro] = 0
             else:
@@ -73,6 +74,18 @@ def interpretar(codigo):
         if caractere != ']':
             indice_caractere = indice_caractere + 1
     print()
+
+class Buffer:
+    # escreve no buffer do terminal
+    def write(self, text):
+        sys.stdout.write(text)
+    # renderiza o que esta escrito no buffer e esvazia
+    def flush(self):
+        sys.stdout.flush()
+    # lendo a proxima tecla e retornando ela
+    def read(self, size):
+        return sys.stdin.read(size)
+        
 
 if __name__ == '__main__':
     main()
