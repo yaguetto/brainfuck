@@ -1,7 +1,20 @@
 # Como rodar
 
+## Linha de comando
 ```
-python main.py hello.bf
+python interpretador.py hello.bf
+```
+
+## Flask
+
+```
+FLASK_APP=server.py flask run
+```
+
+### Hospendando para outras pessoas acessarem
+
+```
+FLASK_APP=server.py flask run --host=0.0.0.0
 ```
 
 # Dependências
