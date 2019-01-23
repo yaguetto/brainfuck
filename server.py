@@ -3,10 +3,9 @@ import codecs
 from flask import Flask
 app = Flask(__name__)
 
-
-abrir_html = codecs.open("interface.html", 'r', 'utf-8')
-index = abrir_html.read()
-abrir_html.close()
+abrir_arquivo = codecs.open("interface.html", "r", "UTF-8")
+index = abrir_arquivo.read()
+abrir_arquivo.close()
 
 @app.route("/")
 def serve_index():
