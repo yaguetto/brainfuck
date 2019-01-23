@@ -36,7 +36,7 @@ container {
         <button type="button" class="btn btn-info" style="background-color: darkgrey; border: darkgrey">Executar</button>
         <div class="form-group">
                 <label for="codigo">Resultado:</label>
-                <textarea class="form-control" id="codigo" style="width: 45%; min-height:200px; max-height: 200px; background-color: white" disabled="disabled"></textarea>
+                <textarea class="form-control" id="retorno" style="width: 45%; min-height:200px; max-height: 200px; background-color: white" disabled="disabled"></textarea>
             </div>
     </form>
     </div>
@@ -52,4 +52,9 @@ container {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
   </body>
+  <script type="text/javascript">
+  var x =10;
+  document.getElementById("retorno").innerHTML = buffer.buffer;
+  
+  </script>
 </html>
