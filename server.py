@@ -4,8 +4,9 @@ from flask import Flask
 app = Flask(__name__)
 
 abrir_arquivo = codecs.open("interface.html", "r", "UTF-8")
-index = abrir_arquivo.read()
+index = abrir_arquivo.read().replace("numero_retorno", "10")
 abrir_arquivo.close()
+
 
 @app.route("/")
 def serve_index():
@@ -42,6 +43,9 @@ def processa_brainfuck():
     '''
     buffer = HTTPBuffer()
     interpretador.server(codigo, buffer)
+    abrir_arquivo = codecs.open("interface.html", "r", "UTF-8")
+    index = abrir_arquivo.read().replace("numero_retorno", str(buffer))
+    abrir_arquivo.close()
     return buffer.buffer
 
 class HTTPBuffer:

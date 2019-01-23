@@ -77,7 +77,7 @@ def interpretar(codigo, buffer):
 def server(codigo, buffer):
     codigo_otimizado = otimizar_codigo(codigo)
     interpretar(codigo_otimizado, buffer)
-    return
+    return 
 
 class ConsoleBuffer:
     # escreve no buffer do terminal
