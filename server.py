@@ -1,10 +1,11 @@
 import interpretador
+import json
 import codecs
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
 arquivo_aberto = codecs.open("interface.html", "r", "UTF-8")
-indice = arquivo_aberto.read().replace("codigo aqui", " ")
+indice = arquivo_aberto.read().replace("'codigo aqui'", " ")
 arquivo_aberto.close()
 
 
@@ -20,7 +21,7 @@ def processa_brainfuck():
     interpretador.server(codigo_string, buffer)
     print(codigo_string, "=", buffer.buffer)
     arquivo_aberto = codecs.open("interface.html", "r", "UTF-8")
-    indice = arquivo_aberto.read().replace("codigo aqui", str(buffer.buffer))
+    indice = arquivo_aberto.read().replace("'codigo aqui'", json.dumps(buffer.buffer))
     arquivo_aberto.close()
     return indice
 
