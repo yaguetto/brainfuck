@@ -1,29 +1,28 @@
 import interpretador
 import json
 import codecs
+import threading
+import time
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
-arquivo_aberto = codecs.open("interface.html", "r", "UTF-8")
-indice = arquivo_aberto.read().replace("'codigo aqui'", " ")
-arquivo_aberto.close()
-
-
 @app.route("/")
 def serve_indice():
-    return indice
+    return render_template("interface.html", a=" ")
 
 @app.route("/", methods=["POST"])
 def processa_brainfuck():
     codigo = request.form.getlist('codigo_input')
     codigo_string = str(codigo[0])
     buffer = HTTPBuffer()
-    interpretador.server(codigo_string, buffer)
+    thread_interpretar = threading.Thread(target = interpretador.server, args=(codigo_string, buffer))
+    thread_interpretar.start()
+    thread_interpretar.join(timeout = 0.5)
+    if thread_interpretar.is_alive():
+        thread_interpretar._Thread_stop()
+    print(thread_interpretar.is_alive())
     print(codigo_string, "=", buffer.buffer)
-    arquivo_aberto = codecs.open("interface.html", "r", "UTF-8")
-    indice = arquivo_aberto.read().replace("'codigo aqui'", json.dumps(buffer.buffer))
-    arquivo_aberto.close()
-    return indice
+    return render_template("interface.html", a=buffer.buffer)
 
 class HTTPBuffer:
     def __init__(self):
