@@ -3,23 +3,26 @@ import codecs
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
-abrir_arquivo = codecs.open("interface.html", "r", "UTF-8")
-index = abrir_arquivo.read()
-abrir_arquivo.close()
+arquivo_aberto = codecs.open("interface.html", "r", "UTF-8")
+indice = arquivo_aberto.read().replace("codigo aqui", " ")
+arquivo_aberto.close()
 
 
 @app.route("/")
-def serve_index():
-    return index
+def serve_indice():
+    return indice
 
 @app.route("/", methods=["POST"])
 def processa_brainfuck():
     codigo = request.form.getlist('codigo_input')
     codigo_string = str(codigo[0])
-    print(codigo_string)
     buffer = HTTPBuffer()
     interpretador.server(codigo_string, buffer)
-    return buffer.buffer
+    print(codigo_string, "=", buffer.buffer)
+    arquivo_aberto = codecs.open("interface.html", "r", "UTF-8")
+    indice = arquivo_aberto.read().replace("codigo aqui", str(buffer.buffer))
+    arquivo_aberto.close()
+    return indice
 
 class HTTPBuffer:
     def __init__(self):
