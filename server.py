@@ -19,8 +19,8 @@ def processa_brainfuck():
     thread_interpretar.start()
     thread_interpretar.join(timeout = 0.5)
     if thread_interpretar.is_alive():
-        thread_interpretar._Thread_stop()
-    print(thread_interpretar.is_alive())
+        print(codigo_string, "=", "excedeu o tempo de execução")
+        return render_template("interface.html", a="excedeu o tempo de execução")
     print(codigo_string, "=", buffer.buffer)
     return render_template("interface.html", a=buffer.buffer)
 

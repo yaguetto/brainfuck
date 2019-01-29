@@ -60,8 +60,6 @@ def interpretar(codigo, buffer):
                         contador_loop += 1
                     elif codigo[indice_caractere] == ']':
                         contador_loop -= 1
-                #print(indice_caractere, ']')
-                #indice_caractere += 1
         elif caractere == ']':
             x = controle_loop.pop()
             indice_caractere = x
@@ -77,7 +75,7 @@ def interpretar(codigo, buffer):
 def server(codigo, buffer):
     codigo_otimizado = otimizar_codigo(codigo)
     interpretar(codigo_otimizado, buffer)
-    return 
+    return
 
 class ConsoleBuffer:
     # escreve no buffer do terminal
