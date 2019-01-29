@@ -13,11 +13,23 @@ def ler_arquivo(arquivo):
     return conteudo
 
 def otimizar_codigo(codigo):
+    colchete_aberto = 0
+    colchete_fechado = 0
     resultado_codigo = []
     for letra in codigo:
         if verificar_caractere_invalido(letra):
             continue
+        if letra == '[':
+            colchete_aberto = colchete_aberto + 1
+        elif letra == ']':
+            colchete_fechado = colchete_fechado + 1
         resultado_codigo.append(letra)
+    print("aberto", colchete_aberto, "fech", colchete_fechado)
+    if colchete_aberto != colchete_fechado:
+        if colchete_aberto > colchete_fechado:
+            return "Colchete aberto a mais."
+        else:
+            return "Colchete fechado a mais."
     return resultado_codigo
 
 def verificar_caractere_invalido(caractere):
@@ -74,6 +86,10 @@ def interpretar(codigo, buffer):
 
 def server(codigo, buffer):
     codigo_otimizado = otimizar_codigo(codigo)
+    print(codigo_otimizado)
+    if codigo_otimizado == "Colchete aberto a mais." or codigo_otimizado == "Colchete fechado a mais.":
+        buffer.buffer = codigo_otimizado
+        return
     interpretar(codigo_otimizado, buffer)
     return
 
