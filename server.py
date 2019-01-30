@@ -1,7 +1,7 @@
 import interpretador
 import json
 import codecs
-import threading
+import multiprocessing
 import time
 from flask import Flask, render_template, request
 app = Flask(__name__)
@@ -15,12 +15,13 @@ def processa_brainfuck():
     codigo = request.form.getlist('codigo_input')
     codigo_string = str(codigo[0])
     buffer = HTTPBuffer()
-    thread_interpretar = threading.Thread(target = interpretador.server, args=(codigo_string, buffer))
-    thread_interpretar.start()
-    thread_interpretar.join(timeout = 0.5)
-    if thread_interpretar.is_alive():
+    process_interpretar = multiprocessing.Process(target = interpretador.server, args=(codigo_string, buffer))
+    process_interpretar.start()
+    process_interpretar.join(timeout = 0.5)
+    process_interpretar.terminate()
+    if process_interpretar.is_alive():
         print(codigo_string, "=", "excedeu o tempo de execução")
-        return render_template("interface.html", a="excedeu o tempo de execução"), print(thread_interpretar.is_alive())
+        return render_template("interface.html", a="excedeu o tempo de execução")
     print(codigo_string, "=", buffer.buffer)
     return render_template("interface.html", a=buffer.buffer)
 
